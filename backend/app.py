@@ -9,11 +9,14 @@ import pymysql
 pymysql.install_as_MySQLdb()
 from flask_jwt_extended import JWTManager
 from routes.file_routes import files_bp
+from flask_cors import CORS
 
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
+
+    CORS(app)
 
     # Init extensions
     bcrypt.init_app(app)

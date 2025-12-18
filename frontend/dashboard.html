@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>File Storage System</title>
-    <link rel="stylesheet" href="/static/style.css">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <header>
-        <h2>File Storage System</h2>
-        <hr>
-    </header>
 
-    {% block content %}{% endblock %}
+  <h2>My Files</h2>
+
+  <input type="file" id="fileInput">
+  <button onclick="uploadFile()">Upload</button>
+
+  <ul id="fileList"></ul>
+
+  <button onclick="logout()">Logout</button>
+
+  <script src="js/files.js"></script>
 </body>
 </html>
