@@ -1,8 +1,14 @@
 const API_BASE = "http://localhost:5000";
 
-function login() {
+function login(e) {
+  e.preventDefault(); 
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
+
+  if (!email || !password) {
+  document.getElementById("message").innerText = "Email and password required";
+  return;
+}
 
   fetch(`${API_BASE}/auth/login`, {
     method: "POST",
@@ -26,6 +32,12 @@ function login() {
 function register() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
+
+  if (password.length < 6) {
+  document.getElementById("message").innerText =
+    "Password must be at least 6 characters";
+  return;
+}
 
   fetch(`${API_BASE}/auth/register`, {
     method: "POST",

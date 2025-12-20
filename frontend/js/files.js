@@ -2,7 +2,7 @@ const API_BASE = "http://localhost:5000";
 const token = localStorage.getItem("token");
 
 if (!token) {
-  window.location.href = "login.html";
+  window.location.href = "/login.html";
 }
 
 function logout() {
@@ -10,10 +10,11 @@ function logout() {
   window.location.href = "login.html";
 }
 
-function uploadFile() {
+function uploadFile(event) {
   const fileInput = document.getElementById("fileInput");
   const file = fileInput.files[0];
-
+  const button = event.target;
+  button.disabled = true;
   if (!file) return alert("Select a file");
 
   const formData = new FormData();
@@ -27,6 +28,7 @@ function uploadFile() {
     body: formData
   })
   .then(() => loadFiles());
+   button.disabled = false;
 }
 
 function loadFiles() {
@@ -35,8 +37,18 @@ function loadFiles() {
       "Authorization": `Bearer ${token}`
     }
   })
-  .then(res => res.json())
+  .then(res => {
+    if (res.status === 401) {
+      alert("Session expired. Please login again.");
+      localStorage.removeItem("token");
+      window.location.href = "/login.html";
+      return;
+    }
+    return res.json();
+  })
   .then(files => {
+    if (!files) return;
+
     const list = document.getElementById("fileList");
     list.innerHTML = "";
 
@@ -52,8 +64,23 @@ function loadFiles() {
   });
 }
 
+
 function downloadFile(id) {
-  window.open(`${API_BASE}/files/download/${id}?token=${token}`);
+  fetch(`${API_BASE}/files/download/${id}`, {
+    headers: {
+      "Authorization": `Bearer ${token}`
+    }
+  })
+  .then(res => res.blob())
+  .then(blob => {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "file";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  });
 }
 
 function deleteFile(id) {

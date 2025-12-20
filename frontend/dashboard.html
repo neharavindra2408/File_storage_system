@@ -2,19 +2,19 @@
 <html>
 <head>
   <title>Dashboard</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="/frontend/css/style.css">
 </head>
 <body>
+  <div class="dashboard">
+    <h2>My Dashboard</h2>
 
-  <h2>My Files</h2>
+    <input type="file" id="fileInput">
+    <button onclick="uploadFile(event)">Upload</button>
 
-  <input type="file" id="fileInput">
-  <button onclick="uploadFile()">Upload</button>
+    <ul id="fileList"></ul>
 
-  <ul id="fileList"></ul>
-
-  <button onclick="logout()">Logout</button>
-
+    <button onclick="logout()">Logout</button>
+  </div>
   <script src="js/files.js"></script>
 </body>
 </html>
