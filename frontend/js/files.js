@@ -5,11 +5,17 @@ if (!token) {
   window.location.href = "/login.html";
 }
 
+//////////////////
+// Logout function
+//////////////////
 function logout() {
   localStorage.removeItem("token");
   window.location.href = "login.html";
 }
 
+//////////////////////////////////
+// Function to upload a file
+/////////////////////////////////
 function uploadFile(event) {
   const fileInput = document.getElementById("fileInput");
   const file = fileInput.files[0];
@@ -31,6 +37,9 @@ function uploadFile(event) {
    button.disabled = false;
 }
 
+//////////////////////////////////////
+// Function to load all files for user
+/////////////////////////////////////
 function loadFiles() {
   fetch(`${API_BASE}/files/list`, {
     headers: {
@@ -54,17 +63,23 @@ function loadFiles() {
 
     files.forEach(f => {
       const li = document.createElement("li");
+      li.className = "file-item";
+
       li.innerHTML = `
-        ${f.filename}
-        <button onclick="downloadFile(${f.id})">Download</button>
-        <button onclick="deleteFile(${f.id})">Delete</button>
+        <span class="file-name">${f.filename}</span>
+        <div class="file-actions">
+          <button onclick="downloadFile(${f.id})" class="download">Download</button>
+          <button onclick="deleteFile(${f.id})" class="delete">Delete</button>
+        </div>
       `;
       list.appendChild(li);
     });
   });
 }
 
-
+//////////////////////////////////
+// Function to download a file
+/////////////////////////////////
 function downloadFile(id) {
   fetch(`${API_BASE}/files/download/${id}`, {
     headers: {
@@ -83,6 +98,9 @@ function downloadFile(id) {
   });
 }
 
+//////////////////////////////////
+// Function to delete a file
+/////////////////////////////////
 function deleteFile(id) {
   fetch(`${API_BASE}/files/delete/${id}`, {
     method: "DELETE",

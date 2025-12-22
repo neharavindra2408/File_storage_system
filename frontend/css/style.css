@@ -104,3 +104,48 @@ li {
 .success {
   color: green;
 }
+
+/* File list layout */
+#fileList {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.file-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* File name */
+.file-name {
+  font-size: 14px;
+}
+
+/* Buttons on right */
+.file-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Download button */
+button.download {
+  background-color: #07a230;
+}
+button.download:hover {
+  background-color: #05671f;
+}
+
+/* Delete button */
+button.delete {
+  background-color: #dc2626;
+}
+
+button.delete:hover {
+  background-color: #b91c1c;
+}
