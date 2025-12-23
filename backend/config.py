@@ -19,8 +19,6 @@ class Config:
         f"{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/"
         f"{os.getenv('DB_NAME')}"
     )
-    # f"mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DB}"
-    # "mysql+pymysql://root:Aani2502@localhost:3306/file_storage"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # 🔐 JWT Config
@@ -31,4 +29,5 @@ class Config:
     BASE_DIR = os.path.abspath(os.path.dirname(__file__))
     UPLOAD_FOLDER = os.path.join(BASE_DIR, "uploads")
 
-    MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # 16 MB limit
+    MAX_CONTENT_LENGTH = int(os.getenv("MAX_CONTENT_LENGTH", 10485760))
+
