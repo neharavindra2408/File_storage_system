@@ -105,6 +105,15 @@ li {
   color: green;
 }
 
+#message {
+  margin-top: 8px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+
 /* File list layout */
 #fileList {
   list-style: none;

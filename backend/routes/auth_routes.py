@@ -15,11 +15,11 @@ def register():
     password = data.get("password")
 
     if not email or not password:
-        return jsonify({"error": "Email and password required"}), 400
+        return jsonify({"msg": "Email and password required"}), 400
 
     exists = User.query.filter_by(email=email).first()
     if exists:
-        return jsonify({"error": "User already exists"}), 409
+        return jsonify({"msg": "User already exists"}), 409
 
     hashed_pw = bcrypt.generate_password_hash(password).decode("utf-8")
 
@@ -27,7 +27,7 @@ def register():
     db.session.add(user)
     db.session.commit()
 
-    return jsonify({"message": "User registered successfully"}), 201
+    return jsonify({"msg": "User registered successfully"}), 201
 
 
 # --------------------------
@@ -41,7 +41,7 @@ def login():
 
     user = User.query.filter_by(email=email).first()
     if not user or not bcrypt.check_password_hash(user.password, password):
-        return jsonify({"error": "Invalid email or password"}), 401
+        return jsonify({"msg": "Invalid email or password"}), 401
 
     # Create JWT token
     token = create_access_token(identity=str(user.id))

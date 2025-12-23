@@ -7,13 +7,13 @@
 <body>
   <div class="container">
     <h2>Register</h2>
-    <form id="registerForm">
-      <input type="email" id="email" placeholder="Email" required />
-      <input type="password" id="password" placeholder="Password" required />
+    <form onsubmit="register(event)">
+      <input type="email" id="email" placeholder="Email"/>
+      <input type="password" id="password" placeholder="Password"/>
 
       <button type="submit">Register</button><br></br>
     </form>
-    <!--<p id="message"></p>-->
+    <p id="message"></p>
     <p class="auth-link">
   Already have an account? <a href="login.html">Login here</a>
     </p>

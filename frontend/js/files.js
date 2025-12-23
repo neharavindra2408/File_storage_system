@@ -1,6 +1,18 @@
 const API_BASE = "http://localhost:5000";
 const token = localStorage.getItem("token");
 
+/////////////////////////
+// Expired token Function
+/////////////////////////
+function isTokenExpired(token) {
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    return payload.exp * 1000 < Date.now();
+  } catch (e) {
+    return true; // treat invalid token as expired
+  }
+}
+
 if (!token || isTokenExpired(token)) {
   localStorage.removeItem("token");
   window.location.href = "login.html";
