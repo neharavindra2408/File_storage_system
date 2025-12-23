@@ -1,12 +1,18 @@
 const API_BASE = "http://localhost:5000";
 
+////////////////////
+// Login Function
+///////////////////
 function login(e) {
   e.preventDefault(); 
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
+  button.disabled = true;
+  btn.innerText = "Logging in...";
 
   if (!email || !password) {
   document.getElementById("message").innerText = "Email and password required";
+  button.disabled = false;
   return;
 }
 
@@ -24,11 +30,15 @@ function login(e) {
       window.location.href = "dashboard.html";
     } else {
       document.getElementById("message").innerText = data.msg || "Login failed";
+      button.disabled = false;
     }
   });
 }
 
 
+////////////////////
+// Register Function
+///////////////////
 function register() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
@@ -67,3 +77,10 @@ function register() {
   });
 }
 
+/////////////////////////
+// Expired token Function
+/////////////////////////
+function isTokenExpired(token) {
+  const payload = JSON.parse(atob(token.split(".")[1]));
+  return payload.exp * 1000 < Date.now();
+}
