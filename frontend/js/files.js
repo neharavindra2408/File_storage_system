@@ -47,6 +47,7 @@ function uploadFile(event) {
     body: formData
   })
   .then(() => loadFiles());
+  alert("File uploaded successfully");
    button.disabled = false;
 }
 
@@ -106,6 +107,7 @@ function downloadFile(id) {
     a.href = url;
     a.download = "file";
     document.body.appendChild(a);
+    alert("File downloaded successfully");
     a.click();
     a.remove();
   });
@@ -122,6 +124,7 @@ function deleteFile(id) {
     }
   })
   .then(() => loadFiles());
+  alert("File deleted");
 }
 
 loadFiles();
